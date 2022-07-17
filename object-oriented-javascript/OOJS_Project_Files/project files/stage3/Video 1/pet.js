@@ -10,22 +10,80 @@ class Pet {
     get activity(){
         let time_now = new Date();
         // let time_min= new Date();
-        return `${time_now.getHours()}:${time_now.getMinutes()}`;
+        if (time_now.getHours() >= 8 && time_now.getHours() <= 20){
+            return `awake ${time_now.getHours()}`
+        }
+        else{
+            return `sleeping ${time_now.getHours()}`
+        }
     }
 
+    get owner(){
+        return this._owner;
+    }
+
+    // owner class
+    
+
+    /*
+    Purpose of setter method is to set a property and value to its
+    owning object!
+    */ 
+    set owner(owner){
+        this._owner = owner;
+    }
+
+        
     // Methods should be added OUTSIDE the constructor class!
     speak(){
         return this.sound
     }
 }
 
+class Owner{
+    constructor(name, address){
+        this.name = name;
+        this. address = address;
+    }
+
+    get phoneNum(){
+        return this._phoneNum;
+    }
+
+    set phoneNum(phoneNum){
+        this._phoneNum = phoneNum.replace(/[^0-9]/g,"");
+    }
+
+    get info(){
+        return (
+        `${this.name},
+         ${this.address},
+         ${this._phoneNum}`
+        )
+    }
+}
+
+
 /**
  * Instantiate a Pet object
  */
 
 let voneric = new Pet("bird", 1, "parrot", "voneric wants a cracker!");
-console.log(voneric, voneric.activity)
 
+// Instantiate voneric.owner as object of Owner class
+voneric.owner = new Owner("colin", "123 Mint St");
+voneric.owner.phoneNum = `(225) 555 5512`;
+
+console.log(voneric, voneric.owner.info)
+
+// voneric.owner = new Owner("Colin", "950 S. Foster Dr #45 Baton Rouge, La 70806")
+// voneric.owner.phoneNum = `225 747 2370`;
+// console.log (voneric.owner)
+
+
+// let testOwner = new Owner("edward", "2545 Lula Ave. Baton ROuge, La 70802");
+// testOwner.phoneNum = `225 747 2370`;
+// console.log(testOwner.info, testOwner["phoneNum"]);
 
 
 
